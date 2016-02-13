@@ -3,6 +3,8 @@ mapbox-gl-compare
 
 Swipe and sync between two maps
 
+![Swipe example](http://i.imgur.com/CynF8tT.gif)
+
 ### Developing
 
     npm install & npm start & open http://localhost:9966/example/
@@ -23,7 +25,7 @@ Lastly, run the test command from the console:
 
 ### Deploying
 
-- `npm run build && npm run docs`
+- `npm run build`
 - Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/package.json#L3)
 - Commit and push
 - `git tag -a vX.X.X -m 'vX.X.X'`

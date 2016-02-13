@@ -17,12 +17,13 @@ function Compare(a, b) {
   a.getContainer().appendChild(this._container);
 
   this._clippedMap = b;
-  this._bounds = this._clippedMap.getContainer().getBoundingClientRect();
-  var midpoint = this._bounds.width / 2;
-
-  b.getContainer().style.clip = 'rect(0, 999em, ' + this._bounds.height + 'px,' + midpoint + 'px)';
-  this._setPosition(midpoint);
+  this._bounds = b.getContainer().getBoundingClientRect();
+  this._setPosition(this._bounds.width / 2);
   this._syncMaps(a, b);
+
+  b.on('resize', function() {
+    this._bounds = b.getContainer().getBoundingClientRect();
+  }.bind(this));
 }
 
 Compare.prototype = {
@@ -67,13 +68,11 @@ Compare.prototype = {
     var pos = 'translate(' + x + 'px, 0)';
     this._container.style.transform = pos;
     this._container.style.WebkitTransform = pos;
+    this._clippedMap.getContainer().style.clip = 'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
   },
 
   _onMove: function(e) {
-    var x = this._getX(e);
-    this._setPosition(x);
-    this._clippedMap.getContainer().style.clip = 'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
-    e.preventDefault();
+    this._setPosition(this._getX(e));
   },
 
   _onMouseUp: function() {

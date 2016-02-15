@@ -26,7 +26,8 @@ Lastly, run the test command from the console:
 ### Deploying
 
 - `npm run build`
-- Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/package.json#L3)
+- Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/master/package.json)
+- Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/master/CHANGELOG.md)
 - Commit and push
 - `git tag -a vX.X.X -m 'vX.X.X'`
 - `git push --tags`

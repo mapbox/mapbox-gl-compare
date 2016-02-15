@@ -23,6 +23,7 @@ function Compare(a, b) {
 
   b.on('resize', function() {
     this._bounds = b.getContainer().getBoundingClientRect();
+    if (this._x) this._setPosition(this._x);
   }.bind(this));
 }
 
@@ -69,6 +70,7 @@ Compare.prototype = {
     this._container.style.transform = pos;
     this._container.style.WebkitTransform = pos;
     this._clippedMap.getContainer().style.clip = 'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
+    this._x = x;
   },
 
   _onMove: function(e) {

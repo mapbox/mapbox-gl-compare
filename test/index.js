@@ -6,8 +6,6 @@ require('../');
 
 mapboxgl.accessToken = process.env.MapboxAccessToken;
 
-console.log('TOKEN', mapboxgl.accessToken);
-
 // Tests
 test('Compare', function(t) {
   var a = new mapboxgl.Map({

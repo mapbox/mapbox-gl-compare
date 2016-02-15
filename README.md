@@ -3,7 +3,7 @@ mapbox-gl-compare
 
 Swipe and sync between two maps
 
-![Swipe example](http://i.imgur.com/CynF8tT.gif)
+![Swipe example](http://i.imgur.com/MvjwVLu.gif)
 
 ### Developing
 

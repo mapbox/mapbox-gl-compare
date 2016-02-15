@@ -6,7 +6,6 @@ function Compare(a, b) {
 
   var swiper = document.createElement('div');
   swiper.className = 'compare-swiper';
-  swiper.innerHTML = '&harr;';
   swiper.addEventListener('mousedown', this._onDown);
   swiper.addEventListener('touchstart', this._onDown);
 

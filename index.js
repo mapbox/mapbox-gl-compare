@@ -1,6 +1,8 @@
 'use strict';
 /* global mapboxgl */
 
+var syncMove = require('mapbox-gl-sync-move');
+
 function Compare(a, b) {
   mapboxgl.util.bindHandlers(this);
 
@@ -18,7 +20,7 @@ function Compare(a, b) {
   this._clippedMap = b;
   this._bounds = b.getContainer().getBoundingClientRect();
   this._setPosition(this._bounds.width / 2);
-  this._syncMaps(a, b);
+  syncMove(a, b);
 
   b.on('resize', function() {
     this._bounds = b.getContainer().getBoundingClientRect();
@@ -27,33 +29,6 @@ function Compare(a, b) {
 }
 
 Compare.prototype = {
-  _copyPosition: function(a, b) {
-    b.jumpTo({
-      center: a.getCenter(),
-      zoom: a.getZoom(),
-      bearing: a.getBearing(),
-      pitch: a.getPitch()
-    });
-  },
-
-  _syncMaps: function(a, b) {
-    var cp = this._copyPosition;
-    function a2b() {
-      b.off('move', b2a);
-      cp(a, b);
-      b.on('move', b2a);
-    }
-
-    function b2a() {
-      a.off('move', b2a);
-      cp(b, a);
-      a.on('move', b2a);
-    }
-
-    a.on('move', a2b);
-    b.on('move', b2a);
-  },
-
   _onDown: function(e) {
     if (e.touches) {
       document.addEventListener('touchmove', this._onMove);

@@ -5,6 +5,8 @@ Swipe and sync between two maps
 
 ![Swipe example](http://i.imgur.com/MvjwVLu.gif)
 
+Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/mapbox-gl-sync-move).
+
 ### Developing
 
     npm install & npm start & open http://localhost:9966/example/

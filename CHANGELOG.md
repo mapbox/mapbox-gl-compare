@@ -1,3 +1,8 @@
+Head
+---
+
+- Use `mapbox-gl-sync-move`
+
 v0.0.1
 ---
 

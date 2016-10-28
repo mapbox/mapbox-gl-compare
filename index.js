@@ -4,7 +4,12 @@
 var syncMove = require('mapbox-gl-sync-move');
 
 function Compare(a, b) {
-  mapboxgl.util.bindHandlers(this);
+  mapboxgl.util.bindAll([
+    '_onDown',
+    '_onMove',
+    '_onMouseUp',
+    '_onTouchEnd'
+  ], this);
 
   var swiper = document.createElement('div');
   swiper.className = 'compare-swiper';

@@ -1,4 +1,9 @@
-Head
+v0.0.3
+---
+
+- Eliminate dependence on mapboxgl.util
+
+v0.0.2
 ---
 
 - Use `mapbox-gl-sync-move`

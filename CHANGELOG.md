@@ -1,3 +1,8 @@
+v0.1.0
+---
+
+- Added compare on `mousemove` [#4](https://github.com/mapbox/mapbox-gl-compare/issues/4)
+
 v0.0.3
 ---
 

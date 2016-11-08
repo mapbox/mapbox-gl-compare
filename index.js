@@ -3,20 +3,19 @@
 
 var syncMove = require('mapbox-gl-sync-move');
 
-function Compare(a, b) {
+function Compare(a, b, options) {
+  this.options = options ? options : {};
   this._onDown = this._onDown.bind(this);
   this._onMove = this._onMove.bind(this);
   this._onMouseUp = this._onMouseUp.bind(this);
   this._onTouchEnd = this._onTouchEnd.bind(this);
 
-  var swiper = document.createElement('div');
-  swiper.className = 'compare-swiper';
-  swiper.addEventListener('mousedown', this._onDown);
-  swiper.addEventListener('touchstart', this._onDown);
+  this._swiper = document.createElement('div');
+  this._swiper.className = 'compare-swiper';
 
   this._container = document.createElement('div');
   this._container.className = 'mapboxgl-compare';
-  this._container.appendChild(swiper);
+  this._container.appendChild(this._swiper);
 
   a.getContainer().appendChild(this._container);
 
@@ -29,9 +28,22 @@ function Compare(a, b) {
     this._bounds = b.getContainer().getBoundingClientRect();
     if (this._x) this._setPosition(this._x);
   }.bind(this));
+
+  if (this.options && this.options.mousemove) {
+    a.getContainer().addEventListener('mousemove', this._onMove);
+    b.getContainer().addEventListener('mousemove', this._onMove);
+  }
+
+  this._swiper.addEventListener('mousedown', this._onDown);
+  this._swiper.addEventListener('touchstart', this._onDown);
 }
 
 Compare.prototype = {
+  _setPointerEvents: function(v) {
+    this._container.style.pointerEvents = v;
+    this._swiper.style.pointerEvents = v;
+  },
+
   _onDown: function(e) {
     if (e.touches) {
       document.addEventListener('touchmove', this._onMove);
@@ -51,6 +63,10 @@ Compare.prototype = {
   },
 
   _onMove: function(e) {
+    if (this.options && this.options.mousemove) {
+      this._setPointerEvents(e.touches ? 'auto' : 'none');
+    }
+
     this._setPosition(this._getX(e));
   },
 

@@ -7,6 +7,26 @@ Swipe and sync between two maps
 
 Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/mapbox-gl-sync-move).
 
+### Usage
+
+```js
+var before = new mapboxgl.Map({
+  container: 'before', // Container ID
+  style: 'mapbox://styles/mapbox/light-v9'
+});
+
+var after = new mapboxgl.Map({
+  container: 'after', // Container ID
+  style: 'mapbox://styles/mapbox/dark-v9'
+});
+
+new mapboxgl.Compare(before, after, {
+  mousemove: true // Optional. Set to true to enable swiping during cursor movement.
+});
+```
+
+Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/
+
 ### Developing
 
     npm install & npm start & open http://localhost:9966

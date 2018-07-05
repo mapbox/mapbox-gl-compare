@@ -55,6 +55,7 @@ Compare.prototype = {
   },
 
   _setPosition: function(x) {
+    x = Math.min(x, this._bounds.width);
     var pos = 'translate(' + x + 'px, 0)';
     this._container.style.transform = pos;
     this._container.style.WebkitTransform = pos;

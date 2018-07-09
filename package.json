@@ -23,9 +23,6 @@
   ],
   "author": "Mapbox",
   "license": "ISC",
-  "peerDependencies": {
-    "mapbox-gl": "0.26.0"
-  },
   "devDependencies": {
     "browserify": "^13.0.0",
     "budo": "^8.0.4",

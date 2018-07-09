@@ -1,3 +1,9 @@
+v0.1.1
+---
+
+- Fixed offscreen bug window resize [#12](https://github.com/mapbox/mapbox-gl-compare/issues/12)
+- Removed mapbox-gl package as a peer dependency [#9](https://github.com/mapbox/mapbox-gl-compare/issues/9)
+
 v0.1.0
 ---
 

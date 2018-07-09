@@ -33,6 +33,9 @@
     "tape": "^4.4.0",
     "uglify-js": "^2.6.1"
   },
+  "peerDependencies": {
+    "mapbox-gl": "0.46.0"
+  },
   "dependencies": {
     "mapbox-gl-sync-move": "^0.1.0"
   }

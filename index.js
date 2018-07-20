@@ -24,7 +24,7 @@ function Compare(a, b, options) {
   this._setPosition(this._bounds.width / 2);
   syncMove(a, b);
 
-  b.on('resize', function() {
+  b.on('resize', function () {
     this._bounds = b.getContainer().getBoundingClientRect();
     if (this._x) this._setPosition(this._x);
   }.bind(this));
@@ -39,12 +39,43 @@ function Compare(a, b, options) {
 }
 
 Compare.prototype = {
-  _setPointerEvents: function(v) {
+  fullscreen: function (a, b, originId) {
+
+    // see if we have a full screen div
+    var fsc = document.getElementById('mapboxgl-compare-fullscreen');
+
+    // if full screen div found, put the maps back into the origin div
+    if (fsc) {
+      // get origin div
+      var origin = document.getElementById(originId);
+
+      // add maps back to origin div
+      origin.appendChild(a.getContainer());
+      origin.appendChild(b.getContainer());
+
+      // remove full screen container
+      document.body.removeChild(fsc);
+    } else {
+
+      // create full screen container and append maps to it
+      fsc = document.createElement('div');
+      fsc.className = 'mapboxgl-compare-fullscreen';
+      fsc.id = 'mapboxgl-compare-fullscreen';
+      fsc.appendChild(a.getContainer());
+      fsc.appendChild(b.getContainer());
+      document.body.appendChild(fsc);
+    }
+
+    // resize the maps
+    a.resize();
+    b.resize();
+  },
+  _setPointerEvents: function (v) {
     this._container.style.pointerEvents = v;
     this._swiper.style.pointerEvents = v;
   },
 
-  _onDown: function(e) {
+  _onDown: function (e) {
     if (e.touches) {
       document.addEventListener('touchmove', this._onMove);
       document.addEventListener('touchend', this._onTouchEnd);
@@ -54,7 +85,7 @@ Compare.prototype = {
     }
   },
 
-  _setPosition: function(x) {
+  _setPosition: function (x) {
     x = Math.min(x, this._bounds.width);
     var pos = 'translate(' + x + 'px, 0)';
     this._container.style.transform = pos;
@@ -63,7 +94,7 @@ Compare.prototype = {
     this._x = x;
   },
 
-  _onMove: function(e) {
+  _onMove: function (e) {
     if (this.options && this.options.mousemove) {
       this._setPointerEvents(e.touches ? 'auto' : 'none');
     }
@@ -71,17 +102,17 @@ Compare.prototype = {
     this._setPosition(this._getX(e));
   },
 
-  _onMouseUp: function() {
+  _onMouseUp: function () {
     document.removeEventListener('mousemove', this._onMove);
     document.removeEventListener('mouseup', this._onMouseUp);
   },
 
-  _onTouchEnd: function() {
+  _onTouchEnd: function () {
     document.removeEventListener('touchmove', this._onMove);
     document.removeEventListener('touchend', this._onTouchEnd);
   },
 
-  _getX: function(e) {
+  _getX: function (e) {
     e = e.touches ? e.touches[0] : e;
     var x = e.clientX - this._bounds.left;
     if (x < 0) x = 0;

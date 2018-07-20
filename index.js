@@ -39,6 +39,12 @@ function Compare(a, b, options) {
 }
 
 Compare.prototype = {
+   /**
+   * Allows for custom full screen button.
+   * @param a The map on the left.
+   * @param b The map on the right.
+   * @param originId The id of the div where both the maps originated from.
+   */
   fullscreen: function (a, b, originId) {
 
     // see if we have a full screen div

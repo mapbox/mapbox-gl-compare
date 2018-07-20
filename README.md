@@ -25,6 +25,26 @@ new mapboxgl.Compare(before, after, {
 });
 ```
 
+### Methods
+
+```js
+compare = new mapboxgl.Compare(before, after, {
+    mousemove: true // Optional. Set to true to enable swiping during cursor movement.
+})
+
+//Get Current position - this will return the slider's current position, in pixels
+compare.currentPosition()
+
+//Set Position - this will set the slider at the specified (x) number of pixels from the left-edge of viewport
+compare.setSlider(x)
+
+//Listen to slider movement - and return current position on each slideend
+compare.on('slideend', (position) => {
+    console.log(position)
+})
+
+```
+
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/
 
 ### Developing

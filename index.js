@@ -35,7 +35,7 @@ function Compare(a, b, options) {
   }
 
   this._swiper.addEventListener('mousedown', this._onDown);
-  this._swiper.addEventListener('touchstart', this._onDown);
+  this._swiper.addEventListener('touchstart', this._onDown); 
 }
 
 Compare.prototype = {
@@ -61,6 +61,7 @@ Compare.prototype = {
     this._container.style.WebkitTransform = pos;
     this._clippedMap.getContainer().style.clip = 'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
     this._x = x;
+    this.currentPosition = this._x;
   },
 
   _onMove: function(e) {
@@ -87,6 +88,18 @@ Compare.prototype = {
     if (x < 0) x = 0;
     if (x > this._bounds.width) x = this._bounds.width;
     return x;
+  },
+
+  setSlider: function(x) {
+    this._setPosition(x);
+  },
+
+  on: function(event, func) {
+    if (event === 'slideend') {
+      document.querySelector('.mapboxgl-compare').addEventListener('mouseup', function() {
+        func(this.currentPosition);
+      })
+    }
   }
 };
 

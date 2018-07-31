@@ -1,5 +1,4 @@
-mapbox-gl-compare
----
+## mapbox-gl-compare
 
 Swipe and sync between two maps
 
@@ -11,13 +10,13 @@ Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/ma
 
 ```js
 var before = new mapboxgl.Map({
-  container: 'before', // Container ID
-  style: 'mapbox://styles/mapbox/light-v9'
+  container: "before", // Container ID
+  style: "mapbox://styles/mapbox/light-v9"
 });
 
 var after = new mapboxgl.Map({
-  container: 'after', // Container ID
-  style: 'mapbox://styles/mapbox/dark-v9'
+  container: "after", // Container ID
+  style: "mapbox://styles/mapbox/dark-v9"
 });
 
 new mapboxgl.Compare(before, after, {
@@ -29,20 +28,19 @@ new mapboxgl.Compare(before, after, {
 
 ```js
 compare = new mapboxgl.Compare(before, after, {
-    mousemove: true // Optional. Set to true to enable swiping during cursor movement.
-})
+  mousemove: true // Optional. Set to true to enable swiping during cursor movement.
+});
 
 //Get Current position - this will return the slider's current position, in pixels
-compare.currentPosition()
+compare.currentPosition();
 
 //Set Position - this will set the slider at the specified (x) number of pixels from the left-edge of viewport
-compare.setSlider(x)
+compare.setSlider(x);
 
 //Listen to slider movement - and return current position on each slideend
-compare.on('slideend', (position) => {
-    console.log(position)
-})
-
+compare.on("slideend", (e) => {
+  console.log(e.currentPosition);
+});
 ```
 
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/

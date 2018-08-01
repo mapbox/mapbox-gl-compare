@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 /* global mapboxgl */
 
-var syncMove = require("mapbox-gl-sync-move");
-var EventEmitter = require("events").EventEmitter;
+var syncMove = require('mapbox-gl-sync-move');
+var EventEmitter = require('events').EventEmitter;
 
 function Compare(a, b, options) {
   this.options = options ? options : {};
@@ -11,11 +11,11 @@ function Compare(a, b, options) {
   this._onMouseUp = this._onMouseUp.bind(this);
   this._onTouchEnd = this._onTouchEnd.bind(this);
   this._ev = new EventEmitter();
-  this._swiper = document.createElement("div");
-  this._swiper.className = "compare-swiper";
+  this._swiper = document.createElement('div');
+  this._swiper.className = 'compare-swiper';
 
-  this._container = document.createElement("div");
-  this._container.className = "mapboxgl-compare";
+  this._container = document.createElement('div');
+  this._container.className = 'mapboxgl-compare';
   this._container.appendChild(this._swiper);
 
   a.getContainer().appendChild(this._container);
@@ -26,7 +26,7 @@ function Compare(a, b, options) {
   syncMove(a, b);
 
   b.on(
-    "resize",
+    'resize',
     function() {
       this._bounds = b.getContainer().getBoundingClientRect();
       if (this.currentPosition) this._setPosition(this.currentPosition);
@@ -34,12 +34,12 @@ function Compare(a, b, options) {
   );
 
   if (this.options && this.options.mousemove) {
-    a.getContainer().addEventListener("mousemove", this._onMove);
-    b.getContainer().addEventListener("mousemove", this._onMove);
+    a.getContainer().addEventListener('mousemove', this._onMove);
+    b.getContainer().addEventListener('mousemove', this._onMove);
   }
 
-  this._swiper.addEventListener("mousedown", this._onDown);
-  this._swiper.addEventListener("touchstart", this._onDown);
+  this._swiper.addEventListener('mousedown', this._onDown);
+  this._swiper.addEventListener('touchstart', this._onDown);
 }
 
 Compare.prototype = {
@@ -50,41 +50,41 @@ Compare.prototype = {
 
   _onDown: function(e) {
     if (e.touches) {
-      document.addEventListener("touchmove", this._onMove);
-      document.addEventListener("touchend", this._onTouchEnd);
+      document.addEventListener('touchmove', this._onMove);
+      document.addEventListener('touchend', this._onTouchEnd);
     } else {
-      document.addEventListener("mousemove", this._onMove);
-      document.addEventListener("mouseup", this._onMouseUp);
+      document.addEventListener('mousemove', this._onMove);
+      document.addEventListener('mouseup', this._onMouseUp);
     }
   },
 
   _setPosition: function(x) {
     x = Math.min(x, this._bounds.width);
-    var pos = "translate(" + x + "px, 0)";
+    var pos = 'translate(' + x + 'px, 0)';
     this._container.style.transform = pos;
     this._container.style.WebkitTransform = pos;
     this._clippedMap.getContainer().style.clip =
-      "rect(0, 999em, " + this._bounds.height + "px," + x + "px)";
+      'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
     this.currentPosition = x;
   },
 
   _onMove: function(e) {
     if (this.options && this.options.mousemove) {
-      this._setPointerEvents(e.touches ? "auto" : "none");
+      this._setPointerEvents(e.touches ? 'auto' : 'none');
     }
 
     this._setPosition(this._getX(e));
   },
 
   _onMouseUp: function() {
-    document.removeEventListener("mousemove", this._onMove);
-    document.removeEventListener("mouseup", this._onMouseUp);
-    this.fire("slideend", { currentPosition: this.currentPosition });
+    document.removeEventListener('mousemove', this._onMove);
+    document.removeEventListener('mouseup', this._onMouseUp);
+    this.fire('slideend', { currentPosition: this.currentPosition });
   },
 
   _onTouchEnd: function() {
-    document.removeEventListener("touchmove", this._onMove);
-    document.removeEventListener("touchend", this._onTouchEnd);
+    document.removeEventListener('touchmove', this._onMove);
+    document.removeEventListener('touchend', this._onTouchEnd);
   },
 
   _getX: function(e) {
@@ -117,6 +117,6 @@ Compare.prototype = {
 
 if (window.mapboxgl) {
   mapboxgl.Compare = Compare;
-} else if (typeof module !== "undefined") {
+} else if (typeof module !== 'undefined') {
   module.exports = Compare;
 }

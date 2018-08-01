@@ -10,13 +10,13 @@ Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/ma
 
 ```js
 var before = new mapboxgl.Map({
-  container: "before", // Container ID
-  style: "mapbox://styles/mapbox/light-v9"
+  container: 'before', // Container ID
+  style: 'mapbox://styles/mapbox/light-v9'
 });
 
 var after = new mapboxgl.Map({
-  container: "after", // Container ID
-  style: "mapbox://styles/mapbox/dark-v9"
+  container: 'after', // Container ID
+  style: 'mapbox://styles/mapbox/dark-v9'
 });
 
 new mapboxgl.Compare(before, after, {
@@ -38,7 +38,7 @@ compare.currentPosition();
 compare.setSlider(x);
 
 //Listen to slider movement - and return current position on each slideend
-compare.on("slideend", (e) => {
+compare.on('slideend', (e) => {
   console.log(e.currentPosition);
 });
 ```
@@ -57,7 +57,7 @@ You'll need a [Mapbox access token](https://www.mapbox.com/help/create-api-acces
 
 Tests require an MapboxAccessToken env variable to be set.
 
-    export MapboxAccessToken="YOUR ACCESS TOKEN"
+    export MapboxAccessToken='YOUR ACCESS TOKEN'
 
 Lastly, run the test command from the console:
 

@@ -2,6 +2,7 @@
 /* global mapboxgl */
 
 var syncMove = require('mapbox-gl-sync-move');
+var EventEmitter = require('events').EventEmitter;
 
 function Compare(a, b, options) {
   this.options = options ? options : {};
@@ -9,7 +10,7 @@ function Compare(a, b, options) {
   this._onMove = this._onMove.bind(this);
   this._onMouseUp = this._onMouseUp.bind(this);
   this._onTouchEnd = this._onTouchEnd.bind(this);
-
+  this._ev = new EventEmitter();
   this._swiper = document.createElement('div');
   this._swiper.className = 'compare-swiper';
 
@@ -24,10 +25,13 @@ function Compare(a, b, options) {
   this._setPosition(this._bounds.width / 2);
   syncMove(a, b);
 
-  b.on('resize', function() {
-    this._bounds = b.getContainer().getBoundingClientRect();
-    if (this._x) this._setPosition(this._x);
-  }.bind(this));
+  b.on(
+    'resize',
+    function() {
+      this._bounds = b.getContainer().getBoundingClientRect();
+      if (this.currentPosition) this._setPosition(this.currentPosition);
+    }.bind(this)
+  );
 
   if (this.options && this.options.mousemove) {
     a.getContainer().addEventListener('mousemove', this._onMove);
@@ -59,8 +63,9 @@ Compare.prototype = {
     var pos = 'translate(' + x + 'px, 0)';
     this._container.style.transform = pos;
     this._container.style.WebkitTransform = pos;
-    this._clippedMap.getContainer().style.clip = 'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
-    this._x = x;
+    this._clippedMap.getContainer().style.clip =
+      'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
+    this.currentPosition = x;
   },
 
   _onMove: function(e) {
@@ -74,6 +79,7 @@ Compare.prototype = {
   _onMouseUp: function() {
     document.removeEventListener('mousemove', this._onMove);
     document.removeEventListener('mouseup', this._onMouseUp);
+    this.fire('slideend', { currentPosition: this.currentPosition });
   },
 
   _onTouchEnd: function() {
@@ -87,6 +93,25 @@ Compare.prototype = {
     if (x < 0) x = 0;
     if (x > this._bounds.width) x = this._bounds.width;
     return x;
+  },
+
+  setSlider: function(x) {
+    this._setPosition(x);
+  },
+
+  on: function(type, fn) {
+    this._ev.on(type, fn);
+    return this;
+  },
+
+  fire: function(type, data) {
+    this._ev.emit(type, data);
+    return this;
+  },
+
+  off: function(type, fn) {
+    this._ev.removeListener(type, fn);
+    return this;
   }
 };
 

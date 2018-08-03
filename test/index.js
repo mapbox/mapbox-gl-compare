@@ -18,7 +18,7 @@ test('Compare', function(t) {
     style: 'mapbox://styles/mapbox/dark-v8'
   });
 
-  var compare = new mapboxgl.Compare(a, b);
+  const compare = new mapboxgl.Compare(a, b);
 
   t.notOk(!!a.getContainer().style.clip, 'Map A is not clipped');
   t.ok(!!b.getContainer().style.clip, 'Map B is clipped');

@@ -1,4 +1,5 @@
-## mapbox-gl-compare
+mapbox-gl-compare
+---
 
 Swipe and sync between two maps
 
@@ -57,7 +58,7 @@ You'll need a [Mapbox access token](https://www.mapbox.com/help/create-api-acces
 
 Tests require an MapboxAccessToken env variable to be set.
 
-    export MapboxAccessToken='YOUR ACCESS TOKEN'
+    export MapboxAccessToken="YOUR ACCESS TOKEN"
 
 Lastly, run the test command from the console:
 

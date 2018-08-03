@@ -1,3 +1,10 @@
+v0.2.0
+---
+
+- Added setSlider method
+- Added `slideend` event listener
+- Expose sliders `currentPosition`
+
 v0.1.1
 ---
 

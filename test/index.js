@@ -18,6 +18,10 @@ test('Compare', function(t) {
     style: 'mapbox://styles/mapbox/dark-v8'
   });
 
+  // insert the container's into the document so compare.setSlider test works
+  document.body.appendChild(a.getContainer());
+  document.body.appendChild(b.getContainer());
+
   const compare = new mapboxgl.Compare(a, b);
 
   t.notOk(!!a.getContainer().style.clip, 'Map A is not clipped');

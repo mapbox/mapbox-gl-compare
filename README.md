@@ -33,7 +33,7 @@ compare = new mapboxgl.Compare(before, after, {
 });
 
 //Get Current position - this will return the slider's current position, in pixels
-compare.currentPosition();
+compare.currentPosition;
 
 //Set Position - this will set the slider at the specified (x) number of pixels from the left-edge of viewport
 compare.setSlider(x);

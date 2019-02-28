@@ -14,6 +14,6 @@ var after = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/dark-v8'
 });
 
-new mapboxgl.Compare(before, after, {
+window.compare = new mapboxgl.Compare(before, after, {
   // mousemove: true
 });

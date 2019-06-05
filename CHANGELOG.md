@@ -1,3 +1,8 @@
+v0.2.1
+---
+
+- Add `mapbox-gl` as a peer dependency
+
 v0.2.0
 ---
 

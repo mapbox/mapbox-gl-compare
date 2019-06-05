@@ -1,6 +1,6 @@
 {
   "name": "mapbox-gl-compare",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Swipe and sync between two maps",
   "main": "index.js",
   "directories": {

@@ -29,7 +29,8 @@ new mapboxgl.Compare(before, after, {
 
 ```js
 compare = new mapboxgl.Compare(before, after, {
-  mousemove: true // Optional. Set to true to enable swiping during cursor movement.
+  mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
+  orientation: 'horizontal' // Optional. Sets the orientation of swiper, defaults to vertical
 });
 
 //Get Current position - this will return the slider's current position, in pixels

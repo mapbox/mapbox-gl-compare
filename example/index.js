@@ -16,4 +16,5 @@ var after = new mapboxgl.Map({
 
 window.compare = new mapboxgl.Compare(before, after, {
   // mousemove: true
+  // orientation: 'horizontal'
 });

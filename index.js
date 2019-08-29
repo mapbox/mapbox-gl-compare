@@ -13,10 +13,10 @@ function Compare(a, b, options) {
   this._onTouchEnd = this._onTouchEnd.bind(this);
   this._ev = new EventEmitter();
   this._swiper = document.createElement('div');
-  this._swiper.className = this._horizontal ? 'swiper-horizontal'  : 'compare-swiper';
+  this._swiper.className = this._horizontal ? 'compare-swiper-horizontal'  : 'compare-swiper-vertical';
 
   this._container = document.createElement('div');
-  this._container.className = this._horizontal ? 'compare-horizontal'  : 'mapboxgl-compare';
+  this._container.className = this._horizontal ? 'mapboxgl-compare mapboxgl-compare-horizontal'  : 'mapboxgl-compare';
   this._container.appendChild(this._swiper);
 
   a.getContainer().appendChild(this._container);

@@ -21,7 +21,8 @@ var after = new mapboxgl.Map({
 });
 
 new mapboxgl.Compare(before, after, {
-  mousemove: true // Optional. Set to true to enable swiping during cursor movement.
+  mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
+  orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
 ```
 
@@ -29,13 +30,14 @@ new mapboxgl.Compare(before, after, {
 
 ```js
 compare = new mapboxgl.Compare(before, after, {
-  mousemove: true // Optional. Set to true to enable swiping during cursor movement.
+  mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
+  orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
 
 //Get Current position - this will return the slider's current position, in pixels
 compare.currentPosition;
 
-//Set Position - this will set the slider at the specified (x) number of pixels from the left-edge of viewport
+//Set Position - this will set the slider at the specified (x) number of pixels from the left-edge or top-edge of viewport based on swiper orientation
 compare.setSlider(x);
 
 //Listen to slider movement - and return current position on each slideend

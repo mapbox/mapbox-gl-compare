@@ -6,23 +6,25 @@ var EventEmitter = require('events').EventEmitter;
 
 function Compare(a, b, options) {
   this.options = options ? options : {};
+  this._horizontal = options.orientation === 'horizontal';
   this._onDown = this._onDown.bind(this);
   this._onMove = this._onMove.bind(this);
   this._onMouseUp = this._onMouseUp.bind(this);
   this._onTouchEnd = this._onTouchEnd.bind(this);
   this._ev = new EventEmitter();
   this._swiper = document.createElement('div');
-  this._swiper.className = 'compare-swiper';
+  this._swiper.className = this._horizontal ? 'compare-swiper-horizontal'  : 'compare-swiper-vertical';
 
   this._container = document.createElement('div');
-  this._container.className = 'mapboxgl-compare';
+  this._container.className = this._horizontal ? 'mapboxgl-compare mapboxgl-compare-horizontal'  : 'mapboxgl-compare';
   this._container.appendChild(this._swiper);
 
   a.getContainer().appendChild(this._container);
 
   this._clippedMap = b;
   this._bounds = b.getContainer().getBoundingClientRect();
-  this._setPosition(this._bounds.width / 2);
+  var swiperPosition = (this._horizontal ? this._bounds.height : this._bounds.width)/2;
+  this._setPosition(swiperPosition);
   syncMove(a, b);
 
   b.on(
@@ -59,12 +61,18 @@ Compare.prototype = {
   },
 
   _setPosition: function(x) {
-    x = Math.min(x, this._bounds.width);
-    var pos = 'translate(' + x + 'px, 0)';
+    x = Math.min(x, this._horizontal
+                    ? this._bounds.height
+                    : this._bounds.width);
+    var pos = this._horizontal
+              ? 'translate(0, '+ x + 'px)'
+              : 'translate(' + x + 'px, 0)';
     this._container.style.transform = pos;
     this._container.style.WebkitTransform = pos;
-    this._clippedMap.getContainer().style.clip =
-      'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
+    var clip = this._horizontal
+                ? 'rect('+ x + 'px, 999em, ' + this._bounds.width + 'px,0)'
+                : 'rect(0, 999em, ' + this._bounds.height + 'px,' + x + 'px)';
+    this._clippedMap.getContainer().style.clip = clip;
     this.currentPosition = x;
   },
 
@@ -73,7 +81,9 @@ Compare.prototype = {
       this._setPointerEvents(e.touches ? 'auto' : 'none');
     }
 
-    this._setPosition(this._getX(e));
+    this._horizontal
+      ? this._setPosition(this._getY(e))
+      : this._setPosition(this._getX(e));
   },
 
   _onMouseUp: function() {
@@ -93,6 +103,14 @@ Compare.prototype = {
     if (x < 0) x = 0;
     if (x > this._bounds.width) x = this._bounds.width;
     return x;
+  },
+
+  _getY: function(e) {
+    e = e.touches ? e.touches[0] : e;
+    var y = e.clientY - this._bounds.top;
+    if (y < 0) y = 0;
+    if (y > this._bounds.height) y = this._bounds.height;
+    return y;
   },
 
   setSlider: function(x) {

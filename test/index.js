@@ -22,7 +22,9 @@ test('Compare', function(t) {
   document.body.appendChild(a.getContainer());
   document.body.appendChild(b.getContainer());
 
-  const compare = new mapboxgl.Compare(a, b);
+  var container = document.createElement('div');
+
+  var compare = new mapboxgl.Compare(a, b, container);
 
   t.notOk(!!a.getContainer().style.clip, 'Map A is not clipped');
   t.ok(!!b.getContainer().style.clip, 'Map B is clipped');

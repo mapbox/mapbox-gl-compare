@@ -14,7 +14,13 @@ var after = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/dark-v8'
 });
 
-window.compare = new mapboxgl.Compare(before, after, {
-  // mousemove: true
-  // orientation: 'vertical'
-});
+window.compare = new mapboxgl.Compare(
+  before,
+  after, 
+  '#wrapper'
+  // document.body.querySelectorAll('#wrapper')[0]
+  // {
+  //   mousemove: true
+  //   orientation: 'horizontal'
+  // }
+);

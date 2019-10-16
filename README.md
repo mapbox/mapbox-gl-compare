@@ -25,7 +25,7 @@ var container = '#comparison-container';
 
 new mapboxgl.Compare(before, after, container, {
   mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
-  orientation: 'vertical', // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical,
+  orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
 ```
 

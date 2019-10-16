@@ -43,7 +43,7 @@ function Compare(a, b, container, options) {
 
   b.on(
     'resize',
-    function () {
+    function() {
       this._bounds = b.getContainer().getBoundingClientRect();
       if (this.currentPosition) this._setPosition(this.currentPosition);
     }.bind(this)
@@ -59,12 +59,12 @@ function Compare(a, b, container, options) {
 }
 
 Compare.prototype = {
-  _setPointerEvents: function (v) {
+  _setPointerEvents: function(v) {
     this._controlContainer.style.pointerEvents = v;
     this._swiper.style.pointerEvents = v;
   },
 
-  _onDown: function (e) {
+  _onDown: function(e) {
     if (e.touches) {
       document.addEventListener('touchmove', this._onMove);
       document.addEventListener('touchend', this._onTouchEnd);
@@ -74,7 +74,7 @@ Compare.prototype = {
     }
   },
 
-  _setPosition: function (x) {
+  _setPosition: function(x) {
     x = Math.min(x, this._horizontal
       ? this._bounds.height
       : this._bounds.width);
@@ -95,7 +95,7 @@ Compare.prototype = {
     this.currentPosition = x;
   },
 
-  _onMove: function (e) {
+  _onMove: function(e) {
     if (this.options && this.options.mousemove) {
       this._setPointerEvents(e.touches ? 'auto' : 'none');
     }
@@ -105,18 +105,18 @@ Compare.prototype = {
       : this._setPosition(this._getX(e));
   },
 
-  _onMouseUp: function () {
+  _onMouseUp: function() {
     document.removeEventListener('mousemove', this._onMove);
     document.removeEventListener('mouseup', this._onMouseUp);
     this.fire('slideend', { currentPosition: this.currentPosition });
   },
 
-  _onTouchEnd: function () {
+  _onTouchEnd: function() {
     document.removeEventListener('touchmove', this._onMove);
     document.removeEventListener('touchend', this._onTouchEnd);
   },
 
-  _getX: function (e) {
+  _getX: function(e) {
     e = e.touches ? e.touches[0] : e;
     var x = e.clientX - this._bounds.left;
     if (x < 0) x = 0;
@@ -124,7 +124,7 @@ Compare.prototype = {
     return x;
   },
 
-  _getY: function (e) {
+  _getY: function(e) {
     e = e.touches ? e.touches[0] : e;
     var y = e.clientY - this._bounds.top;
     if (y < 0) y = 0;
@@ -132,21 +132,21 @@ Compare.prototype = {
     return y;
   },
 
-  setSlider: function (x) {
+  setSlider: function(x) {
     this._setPosition(x);
   },
 
-  on: function (type, fn) {
+  on: function(type, fn) {
     this._ev.on(type, fn);
     return this;
   },
 
-  fire: function (type, data) {
+  fire: function(type, data) {
     this._ev.emit(type, data);
     return this;
   },
 
-  off: function (type, fn) {
+  off: function(type, fn) {
     this._ev.removeListener(type, fn);
     return this;
   }

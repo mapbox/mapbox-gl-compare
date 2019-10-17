@@ -4,8 +4,8 @@
   <meta charset='utf-8' />
   <title></title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
   <link href='style.css' rel='stylesheet' />
   <style>
   body { margin:0; padding:0; overflow:hidden; }
@@ -25,8 +25,10 @@
   </style>
 </head>
 <body>
-  <div id='before' class='map'></div>
-  <div id='after' class='map'></div>
+  <div id='wrapper'>
+    <div id='before' class='map'></div>
+    <div id='after' class='map'></div>
+  </div>
   <script src='example/bundle.js'></script>
 </body>
 </html>

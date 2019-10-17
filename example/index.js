@@ -14,7 +14,19 @@ var after = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/dark-v8'
 });
 
-window.compare = new mapboxgl.Compare(before, after, {
-  // mousemove: true
-  // orientation: 'vertical'
-});
+// Use either of these patterns to select a container for the compare widget
+var wrapperSelector = '#wrapper';
+var wrapperElement = document.body.querySelectorAll('#wrapper')[0];
+
+// available options
+var options = {
+  mousemove: true,
+  orientation: 'horizontal'
+}
+
+window.compare = new mapboxgl.Compare(
+  before,
+  after, 
+  wrapperSelector
+  // options
+);

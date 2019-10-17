@@ -20,7 +20,10 @@ var after = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/dark-v9'
 });
 
-new mapboxgl.Compare(before, after, {
+// A selector or reference to HTML element
+var container = '#comparison-container';
+
+new mapboxgl.Compare(before, after, container, {
   mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
   orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
@@ -29,7 +32,7 @@ new mapboxgl.Compare(before, after, {
 ### Methods
 
 ```js
-compare = new mapboxgl.Compare(before, after, {
+compare = new mapboxgl.Compare(before, after, container, {
   mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
   orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });

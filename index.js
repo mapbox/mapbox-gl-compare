@@ -39,15 +39,14 @@ function Compare(a, b, container, options) {
   this._bounds = b.getContainer().getBoundingClientRect();
   var swiperPosition = (this._horizontal ? this._bounds.height : this._bounds.width) / 2;
   this._setPosition(swiperPosition);
-  syncMove(a, b);
 
-  b.on(
-    'resize',
-    function() {
-      this._bounds = b.getContainer().getBoundingClientRect();
-      if (this.currentPosition) this._setPosition(this.currentPosition);
-    }.bind(this)
-  );
+  this._clearSync = syncMove(a, b);
+  this._onResize = function() {
+    this._bounds = b.getContainer().getBoundingClientRect();
+    if (this.currentPosition) this._setPosition(this.currentPosition);
+  }.bind(this);
+
+  b.on('resize', this._onResize);
 
   if (this.options && this.options.mousemove) {
     a.getContainer().addEventListener('mousemove', this._onMove);
@@ -149,6 +148,28 @@ Compare.prototype = {
   off: function(type, fn) {
     this._ev.removeListener(type, fn);
     return this;
+  },
+
+  remove: function() {
+    this._clearSync();
+    this._mapB.off('resize', this._onResize);
+    var aContainer = this._mapA.getContainer();
+
+    if (!!aContainer) {
+      aContainer.style.clip = null;
+      aContainer.removeEventListener('mousemove', this._onMove);
+    }
+
+    var bContainer = this._mapB.getContainer();
+
+    if (!!bContainer) {
+      bContainer.style.clip = null;
+      bContainer.removeEventListener('mousemove', this._onMove);
+    }
+
+    this._swiper.removeEventListener('mousedown', this._onDown);
+    this._swiper.removeEventListener('touchstart', this._onDown);
+    this._controlContainer.remove();
   }
 };
 

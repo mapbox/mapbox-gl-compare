@@ -35,7 +35,7 @@
     "uglify-js": "^3.4.9"
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-sync-move": "^0.2.0"
+    "@mapbox/mapbox-gl-sync-move": "^0.3.0"
   },
   "peerDependencies": {
     "mapbox-gl": ">=0.32.1 <2.0.0"

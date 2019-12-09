@@ -21,13 +21,21 @@
     top:0;
     bottom:0;
     width:100%;
-    }
+  }
+  .controls {
+    position:absolute;
+    top:0;
+    right:0;
+  }
   </style>
 </head>
 <body>
   <div id='wrapper'>
     <div id='before' class='map'></div>
     <div id='after' class='map'></div>
+    <div class="controls">
+        <button id="close-button">X</button>
+    </div>
   </div>
   <script src='example/bundle.js'></script>
 </body>

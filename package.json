@@ -10,7 +10,8 @@
     "start": "cp style.css example/style.css && budo example/index.js --serve example/bundle.js --dir example --live",
     "build": "cp style.css dist/mapbox-gl-compare.css && NODE_ENV=production && browserify index.js | uglifyjs -c -m > dist/mapbox-gl-compare.js",
     "test": "npm run lint && browserify -t envify test/index.js | smokestack -b firefox | tap-status",
-    "lint": "eslint --no-eslintrc -c .eslintrc index.js"
+    "lint": "eslint --no-eslintrc -c .eslintrc index.js",
+    "docs": "documentation build index.js --format=md > API.md"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "browserify": "^16.2.3",
     "budo": "^11.6.0",
+    "documentation": "^12.1.4",
     "envify": "^4.1.0",
     "eslint": "^5.13.0",
     "mapbox-gl": "^1.4.1",

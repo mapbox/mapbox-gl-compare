@@ -2,7 +2,7 @@ v0.3.0
 ---
 
 - Now accurately displays translucent styles
-- Requires a container element to append to
+- :warning: BREAKING CHANGE Requires a container element to append to
 
 v0.2.1
 ---

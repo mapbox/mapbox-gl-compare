@@ -30,3 +30,11 @@ window.compare = new mapboxgl.Compare(
   wrapperSelector
   // options
 );
+
+var closeButton = document.getElementById('close-button');
+
+closeButton.addEventListener('click', function(e) {
+  after.getContainer().style.display = 'none';
+  window.compare.remove();
+  after.remove();
+});

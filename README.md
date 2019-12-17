@@ -47,6 +47,9 @@ compare.setSlider(x);
 compare.on('slideend', (e) => {
   console.log(e.currentPosition);
 });
+
+//Remove - this will remove the compare control from the DOM and stop synchronizing the two maps.
+compare.remove();
 ```
 
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/

@@ -26,7 +26,7 @@ test('Compare', function(t) {
 
   var compare = new mapboxgl.Compare(a, b, container);
 
-  t.notOk(!!a.getContainer().style.clip, 'Map A is not clipped');
+  t.ok(!!a.getContainer().style.clip, 'Map A is clipped');
   t.ok(!!b.getContainer().style.clip, 'Map B is clipped');
 
   b.jumpTo({
@@ -47,7 +47,29 @@ test('Compare', function(t) {
 
   compare.setSlider(20);
 
-  t.equals(compare.currentPosition, 20, 'Slider has been moved')
+  t.equals(compare.currentPosition, 20, 'Slider has been moved');
+
+  compare.remove();
+
+  t.ok(!a.getContainer().style.clip, 'Map A is no longer clipped');
+  t.ok(!b.getContainer().style.clip, 'Map B is no longer clipped');
+
+  b.jumpTo({
+    bearing: 10,
+    center: {
+      lat: 26,
+      lng: -105
+    },
+    pitch: 30,
+    zoom: 5
+  });
+
+  t.equals(a.getZoom(), 3, 'Zoom is no longer synched');
+  t.equals(a.getPitch(), 20, 'Pitch is no longer synched');
+  t.equals(a.getBearing(), 20, 'Bearing is no longer synched');
+  t.equals(a.getCenter().lng, -155, 'Lng is no longer synched');
+  t.equals(a.getCenter().lat, 16, 'Lat is no longer synched');
+
   t.end();
 });
 

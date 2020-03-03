@@ -54,6 +54,8 @@ compare.remove();
 
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/
 
+See [API.md](https://github.com/mapbox/mapbox-gl-compare/blob/master/API.md) for complete reference.
+
 ### Developing
 
     npm install & npm start & open http://localhost:9966

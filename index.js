@@ -4,6 +4,20 @@
 var syncMove = require('@mapbox/mapbox-gl-sync-move');
 var EventEmitter = require('events').EventEmitter;
 
+/**
+ * @param {Object} a The first Mapbox GL Map
+ * @param {Object} b The second Mapbox GL Map
+ * @param {string|HTMLElement} container An HTML Element, or an element selector string for the compare container. It should be a wrapper around the two map Elements.
+ * @param {Object} options
+ * @param {string} [options.orientation=vertical] The orientation of the compare slider. `vertical` creates a vertical slider bar to compare one map on the left (map A) with another map on the right (map B). `horizontal` creates a horizontal slider bar to compare on mop on the top (map A) and another map on the bottom (map B).
+ * @param {boolean} [options.mousemove=false] If `true` the compare slider will move with the cursor, otherwise the slider will need to be dragged to move.
+ * @example
+ * var compare = new mapboxgl.Compare(beforeMap, afterMap, '#wrapper', {
+ *   orientation: 'vertical',
+ *   mousemove: true
+ * });
+ * @see [Swipe between maps](https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/)
+ */
 function Compare(a, b, container, options) {
   this.options = options ? options : {};
   this._mapA = a;
@@ -131,20 +145,46 @@ Compare.prototype = {
     return y;
   },
 
+  /**
+   * Set the position of the slider.
+   *
+   * @param {number} x Slider position in pixels from left/top.
+   */
   setSlider: function(x) {
     this._setPosition(x);
   },
 
+  /**
+   * Adds a listener for events of a specified type.
+   *
+   * @param {string} type The event type to listen for; one of `slideend`.
+   * @param {Function} listener The function to be called when the event is fired.
+   * @returns {Compare} `this`
+   */
   on: function(type, fn) {
     this._ev.on(type, fn);
     return this;
   },
 
+  /**
+   * Fire an event of a specified type.
+   *
+   * @param {string} type The event type to fire; one of `slideend`.
+   * @param {Object} data Data passed to the event listener.
+   * @returns {Compare} `this`
+   */
   fire: function(type, data) {
     this._ev.emit(type, data);
     return this;
   },
 
+  /**
+   * Removes an event listener previously added with `Compare#on`.
+   *
+   * @param {string} type The event type previously used to install the listener.
+   * @param {Function} listener The function previously installed as a listener.
+   * @returns {Compare} `this`
+   */
   off: function(type, fn) {
     this._ev.removeListener(type, fn);
     return this;

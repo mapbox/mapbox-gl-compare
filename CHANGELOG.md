@@ -1,3 +1,8 @@
+v0.4.0
+---
+
+- Added `remove` method [#26](https://github.com/mapbox/mapbox-gl-compare/pull/26)
+
 v0.3.0
 ---
 

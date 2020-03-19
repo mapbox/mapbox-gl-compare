@@ -76,6 +76,7 @@ Lastly, run the test command from the console:
 
 ### Deploying
 
+#### npm registry
 - `npm run build`
 - Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/master/package.json)
 - Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/master/CHANGELOG.md)
@@ -83,4 +84,8 @@ Lastly, run the test command from the console:
 - `git tag -a vX.X.X -m 'vX.X.X'`
 - `git push --tags`
 - `npm publish`
-- Update version number in [GL JS example](https://github.com/mapbox/mapbox-gl-js/blob/mb-pages/docs/_posts/examples/3400-01-21-mapbox-gl-compare.html)
+- Update version number in [GL JS example](https://github.com/mapbox/mapbox-gl-js-docs/blob/publisher-production/docs/pages/example/mapbox-gl-compare.html)
+
+### mapbox cdn
+- `aws s3 cp --acl public-read ./dist/mapbox-gl-compare.js s3://mapbox-gl-js/plugins/mapbox-gl-compare/v$(node --print --eval "require('./package.json').version")/mapbox-gl-compare.js`
+- `aws s3 cp --acl public-read ./dist/mapbox-gl-compare.css s3://mapbox-gl-js/plugins/mapbox-gl-compare/v$(node --print --eval "require('./package.json').version")/mapbox-gl-compare.css`

@@ -54,7 +54,7 @@ compare.remove();
 
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/
 
-See [API.md](https://github.com/mapbox/mapbox-gl-compare/blob/master/API.md) for complete reference.
+See [API.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/API.md) for complete reference.
 
 ### Developing
 
@@ -78,8 +78,8 @@ Lastly, run the test command from the console:
 
 #### npm registry
 - `npm run build`
-- Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/master/package.json)
-- Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/master/CHANGELOG.md)
+- Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/main/package.json)
+- Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/CHANGELOG.md)
 - Commit and push
 - `git tag -a vX.X.X -m 'vX.X.X'`
 - `git push --tags`

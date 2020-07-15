@@ -127,6 +127,7 @@ Compare.prototype = {
   _onTouchEnd: function() {
     document.removeEventListener('touchmove', this._onMove);
     document.removeEventListener('touchend', this._onTouchEnd);
+    this.fire('slideend', { currentPosition: this.currentPosition });
   },
 
   _getX: function(e) {

@@ -190,6 +190,9 @@ Compare.prototype = {
     return this;
   },
 
+  /**
+   * Removes the control from the DOM and stop synchronizing the two maps.
+   */
   remove: function() {
     this._clearSync();
     this._mapB.off('resize', this._onResize);

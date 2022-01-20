@@ -1,9 +1,12 @@
 mapbox-gl-compare
 ---
 
-Swipe and sync between two maps
+Compare between two synced maps.
+Support modes:
+ - Slider
+ - Lens
 
-![Swipe example](http://i.imgur.com/MvjwVLu.gif)
+![Slider example](http://i.imgur.com/MvjwVLu.gif)
 
 Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/mapbox-gl-sync-move).
 
@@ -24,8 +27,9 @@ var after = new mapboxgl.Map({
 var container = '#comparison-container';
 
 new mapboxgl.Compare(before, after, container, {
+  mode: 'slider', // Optional. Set the mode, defaults to slider.
   mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
-  orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
+  orientation: 'vertical', // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
 ```
 
@@ -50,6 +54,18 @@ compare.on('slideend', (e) => {
 
 //Remove - this will remove the compare control from the DOM and stop synchronizing the two maps.
 compare.remove();
+
+// Compare in lens mode.
+lensCompare = new mapboxgl.Compare(before, after, container, {
+  mode: 'lens',
+  size: 80  // Optional. Set the size of the lens, defaults to 100.
+});
+
+//Set Size - this will set the size of the lens
+lensCompare.setSize(100);
+
+//Remove - this will remove the compare control from the DOM and stop synchronizing the two maps.
+lensCompare.remove();
 ```
 
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/

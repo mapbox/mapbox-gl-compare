@@ -22,6 +22,7 @@ function Compare(a, b, container, options) {
   this.options = options ? options : {};
   this._mapA = a;
   this._mapB = b;
+  this._container = container;
   this._horizontal = this.options.orientation === 'horizontal';
   this._onDown = this._onDown.bind(this);
   this._onMove = this._onMove.bind(this);
@@ -31,28 +32,10 @@ function Compare(a, b, container, options) {
   this._swiper = document.createElement('div');
   this._swiper.className = this._horizontal ? 'compare-swiper-horizontal' : 'compare-swiper-vertical';
 
-  this._controlContainer = document.createElement('div');
-  this._controlContainer.className = this._horizontal ? 'mapboxgl-compare mapboxgl-compare-horizontal' : 'mapboxgl-compare';
-  this._controlContainer.className = this._controlContainer.className;
-  this._controlContainer.appendChild(this._swiper);
-
-  if (typeof container === 'string' && document.body.querySelectorAll) {
-    // get container with a selector
-    var appendTarget = document.body.querySelectorAll(container)[0];
-    if (!appendTarget) {
-      throw new Error('Cannot find element with specified container selector.')
-    }
-    appendTarget.appendChild(this._controlContainer)
-  } else if (container instanceof Element && container.appendChild) {
-    // get container directly
-    container.appendChild(this._controlContainer)
-  } else {
-    throw new Error('Invalid container specified. Must be CSS selector or HTML element.')
-  }
+  this._createControlContainer();
 
   this._bounds = b.getContainer().getBoundingClientRect();
-  var swiperPosition = (this._horizontal ? this._bounds.height : this._bounds.width) / 2;
-  this._setPosition(swiperPosition);
+  this._setPosition(this._getSwiperPosition());
 
   this._clearSync = syncMove(a, b);
   this._onResize = function() {
@@ -62,16 +45,33 @@ function Compare(a, b, container, options) {
 
   b.on('resize', this._onResize);
 
-  if (this.options && this.options.mousemove) {
-    a.getContainer().addEventListener('mousemove', this._onMove);
-    b.getContainer().addEventListener('mousemove', this._onMove);
-  }
+  this._setMousemove();
 
   this._swiper.addEventListener('mousedown', this._onDown);
   this._swiper.addEventListener('touchstart', this._onDown);
 }
 
 Compare.prototype = {
+  _createControlContainer: function () {
+    this._controlContainer = document.createElement('div');
+    this._controlContainer.className = this._horizontal ? 'mapboxgl-compare mapboxgl-compare-horizontal' : 'mapboxgl-compare';
+    this._controlContainer.className = this._controlContainer.className;
+    this._controlContainer.appendChild(this._swiper);
+    if (typeof this._container === 'string' && document.body.querySelectorAll) {
+      // get container with a selector
+      var appendTarget = document.body.querySelectorAll(this._container)[0];
+      if (!appendTarget) {
+        throw new Error('Cannot find element with specified this._container selector.')
+      }
+      appendTarget.appendChild(this._controlContainer)
+    } else if (this._container instanceof Element && this._container.appendChild) {
+      // get container directly
+      this._container.appendChild(this._controlContainer)
+    } else {
+      throw new Error('Invalid container specified. Must be CSS selector or HTML element.')
+    }
+  },
+
   _setPointerEvents: function(v) {
     this._controlContainer.style.pointerEvents = v;
     this._swiper.style.pointerEvents = v;
@@ -130,6 +130,18 @@ Compare.prototype = {
     this.fire('slideend', { currentPosition: this.currentPosition });
   },
 
+  _getMapAContainer: function () {
+    return this._mapA.getContainer();
+  },
+
+  _getMapBContainer: function () {
+    return this._mapB.getContainer();
+  },
+
+  _getSwiperPosition: function () {
+    return (this._horizontal ? this._bounds.height : this._bounds.width) / 2;
+  },
+
   _getX: function(e) {
     e = e.touches ? e.touches[0] : e;
     var x = e.clientX - this._bounds.left;
@@ -144,6 +156,13 @@ Compare.prototype = {
     if (y < 0) y = 0;
     if (y > this._bounds.height) y = this._bounds.height;
     return y;
+  },
+
+  _setMousemove: function () {
+    if (this.options && this.options.mousemove) {
+      this._getMapAContainer().addEventListener('mousemove', this._onMove);
+      this._getMapBContainer().addEventListener('mousemove', this._onMove);
+    }
   },
 
   /**
@@ -190,6 +209,24 @@ Compare.prototype = {
     this._ev.removeListener(type, fn);
     return this;
   },
+
+   /**
+   * Re-adds map B, previously removed with remove() function.
+   */
+    reAdd: function () {
+      var aContainer = this._getMapAContainer();
+      var bContainer = this._getMapBContainer();
+      if (aContainer.style.clip && bContainer.style.clip) {
+        return;
+      }
+      this._createControlContainer();
+      this._setPosition(this._getSwiperPosition());
+      this._setMousemove();
+      this._swiper.addEventListener('mousedown', this._onDown);
+      this._swiper.addEventListener('touchstart', this._onDown);
+      this._clearSync = syncMove(this._mapA, this._mapB);
+      this._mapB.on('resize', this._onResize);
+    },
 
   remove: function() {
     this._clearSync();

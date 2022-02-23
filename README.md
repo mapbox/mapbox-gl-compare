@@ -50,6 +50,9 @@ compare.on('slideend', (e) => {
 
 //Remove - this will remove the compare control from the DOM and stop synchronizing the two maps.
 compare.remove();
+
+//Re-add - this will re-add the compare control to the DOM and return synchronizing the two maps.
+compare.reAdd();
 ```
 
 Demo: https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/

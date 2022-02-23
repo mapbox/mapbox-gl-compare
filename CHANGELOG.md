@@ -1,3 +1,8 @@
+v0.5.0
+---
+
+- Added `reAdd` method
+
 v0.4.0
 ---
 

@@ -26,28 +26,32 @@ test('Compare', function(t) {
 
   var compare = new mapboxgl.Compare(a, b, container);
 
-  t.ok(!!a.getContainer().style.clip, 'Map A is clipped');
-  t.ok(!!b.getContainer().style.clip, 'Map B is clipped');
+  function testCompareMapsAB() {
+    t.ok(!!a.getContainer().style.clip, 'Map A is clipped');
+    t.ok(!!b.getContainer().style.clip, 'Map B is clipped');
 
-  b.jumpTo({
-    bearing: 20,
-    center: {
-      lat: 16,
-      lng: -155
-    },
-    pitch: 20,
-    zoom: 3
-  });
+    b.jumpTo({
+      bearing: 20,
+      center: {
+        lat: 16,
+        lng: -155
+      },
+      pitch: 20,
+      zoom: 3
+    });
 
-  t.equals(a.getZoom(), 3, 'Zoom is synched');
-  t.equals(a.getPitch(), 20, 'Pitch is synched');
-  t.equals(a.getBearing(), 20, 'Bearing is synched');
-  t.equals(a.getCenter().lng, -155, 'Lng is synched');
-  t.equals(a.getCenter().lat, 16, 'Lat is synched');
+    t.equals(a.getZoom(), 3, 'Zoom is synched');
+    t.equals(a.getPitch(), 20, 'Pitch is synched');
+    t.equals(a.getBearing(), 20, 'Bearing is synched');
+    t.equals(a.getCenter().lng, -155, 'Lng is synched');
+    t.equals(a.getCenter().lat, 16, 'Lat is synched');
 
-  compare.setSlider(20);
+    compare.setSlider(20);
 
-  t.equals(compare.currentPosition, 20, 'Slider has been moved');
+    t.equals(compare.currentPosition, 20, 'Slider has been moved');
+  }
+
+  testCompareMapsAB();
 
   compare.remove();
 
@@ -69,6 +73,10 @@ test('Compare', function(t) {
   t.equals(a.getBearing(), 20, 'Bearing is no longer synched');
   t.equals(a.getCenter().lng, -155, 'Lng is no longer synched');
   t.equals(a.getCenter().lat, 16, 'Lat is no longer synched');
+
+  compare.reAdd();
+
+  testCompareMapsAB();
 
   t.end();
 });

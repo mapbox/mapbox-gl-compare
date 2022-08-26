@@ -1,6 +1,6 @@
 'use strict';
 
-var test = require('tape');
+const test = require('tape');
 window.mapboxgl = require('mapbox-gl');
 require('../');
 
@@ -8,12 +8,12 @@ mapboxgl.accessToken = process.env.MapboxAccessToken;
 
 // Tests
 test('Compare', function(t) {
-  var a = new mapboxgl.Map({
+  const a = new mapboxgl.Map({
     container: document.createElement('div'),
     style: 'mapbox://styles/mapbox/light-v8'
   });
 
-  var b = new mapboxgl.Map({
+  const b = new mapboxgl.Map({
     container: document.createElement('div'),
     style: 'mapbox://styles/mapbox/dark-v8'
   });
@@ -22,9 +22,9 @@ test('Compare', function(t) {
   document.body.appendChild(a.getContainer());
   document.body.appendChild(b.getContainer());
 
-  var container = document.createElement('div');
+  const container = document.createElement('div');
 
-  var compare = new mapboxgl.Compare(a, b, container);
+  const compare = new mapboxgl.Compare(a, b, container);
 
   t.ok(!!a.getContainer().style.clip, 'Map A is clipped');
   t.ok(!!b.getContainer().style.clip, 'Map B is clipped');

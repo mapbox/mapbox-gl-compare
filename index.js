@@ -1,5 +1,4 @@
 'use strict';
-/* global mapboxgl */
 
 var syncMove = require('@mapbox/mapbox-gl-sync-move');
 var EventEmitter = require('events').EventEmitter;

@@ -25,21 +25,18 @@
   "author": "Mapbox",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^16.2.3",
-    "budo": "^11.6.0",
-    "documentation": "^12.1.4",
+    "browserify": "^17.0.0",
+    "budo": "^11.7.0",
+    "documentation": "^14.0.0",
     "envify": "^4.1.0",
-    "eslint": "^5.13.0",
-    "mapbox-gl": "^1.4.1",
+    "eslint": "^8.22.0",
+    "mapbox-gl": "^2.10.0",
     "smokestack": "^3.6.0",
     "tap-status": "^1.0.1",
-    "tape": "^4.9.2",
-    "uglify-js": "^3.4.9"
+    "tape": "^5.6.0",
+    "uglify-js": "^3.17.0"
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-sync-move": "^0.3.0"
-  },
-  "peerDependencies": {
-    "mapbox-gl": ">=0.32.1 <2.0.0"
+    "@mapbox/mapbox-gl-sync-move": "^0.3.1"
   }
 }

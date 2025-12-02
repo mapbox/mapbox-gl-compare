@@ -77,6 +77,8 @@ Compare.prototype = {
   },
 
   _onDown: function(e) {
+    e.preventDefault();
+    
     if (e.touches) {
       document.addEventListener('touchmove', this._onMove);
       document.addEventListener('touchend', this._onTouchEnd);

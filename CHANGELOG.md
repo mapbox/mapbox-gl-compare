@@ -1,3 +1,15 @@
+v0.4.2
+---
+
+- Fix: `preventdefault`  on compare control down to prevent unwanted conflicts with DOM #54
+- Added documentation for `remove` method #36
+
+v0.4.1
+---
+
+- Fix: `slideend` wasn't being fired on mobile devices.
+- Remove `mapbox-gl` peer dependency
+
 v0.4.0
 ---
 

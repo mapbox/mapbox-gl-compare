@@ -1,3 +1,9 @@
+v0.5.0
+---
+
+- Feature: Added ESM entrypoint, `import mapboxglCompare from 'mapbox-gl-compare'`
+
+
 v0.4.2
 ---
 

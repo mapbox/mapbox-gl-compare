@@ -7,16 +7,49 @@ Swipe and sync between two maps
 
 Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/mapbox-gl-sync-move).
 
+### Installation
+
+**CDN**
+
+Include the script and stylesheet in your HTML. `Compare` is attached to the `mapboxgl` global.
+
+```html
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.5.0/mapbox-gl-compare.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.5.0/mapbox-gl-compare.css">
+```
+
+**ESM via npm**
+
+```bash
+npm install mapbox-gl-compare
+```
+
+```js
+import Compare from 'mapbox-gl-compare';
+import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
+```
+
+**ESM via CDN**
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mapbox-gl-compare@0.5.0/dist/mapbox-gl-compare.css">
+<script type="module">
+  import Compare from 'https://cdn.jsdelivr.net/npm/mapbox-gl-compare@0.5.0/dist/mapbox-gl-compare.esm.js';
+</script>
+```
+
 ### Usage
+
+**CDN**
 
 ```js
 var before = new mapboxgl.Map({
-  container: 'before', // Container ID
+  container: 'before',
   style: 'mapbox://styles/mapbox/light-v9'
 });
 
 var after = new mapboxgl.Map({
-  container: 'after', // Container ID
+  container: 'after',
   style: 'mapbox://styles/mapbox/dark-v9'
 });
 
@@ -24,6 +57,32 @@ var after = new mapboxgl.Map({
 var container = '#comparison-container';
 
 new mapboxgl.Compare(before, after, container, {
+  mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
+  orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
+});
+```
+
+**ESM**
+
+```js
+import * as mapboxgl from 'mapbox-gl';
+import Compare from 'mapbox-gl-compare';
+import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
+
+const before = new mapboxgl.Map({
+  container: 'before',
+  style: 'mapbox://styles/mapbox/light-v9'
+});
+
+const after = new mapboxgl.Map({
+  container: 'after',
+  style: 'mapbox://styles/mapbox/dark-v9'
+});
+
+// A selector or reference to HTML element
+const container = '#comparison-container';
+
+new Compare(before, after, container, {
   mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
   orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
@@ -77,7 +136,7 @@ Lastly, run the test command from the console:
 ### Deploying
 
 #### npm registry
-- `npm run build`
+- `npm run build && npm run build:esm`
 - Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/main/package.json)
 - Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/CHANGELOG.md)
 - Commit and push

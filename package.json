@@ -5,8 +5,11 @@
   "main": "index.js",
   "module": "dist/mapbox-gl-compare.esm.js",
   "exports": {
-    "import": "./dist/mapbox-gl-compare.esm.js",
-    "require": "./index.js"
+    ".": {
+      "import": "./dist/mapbox-gl-compare.esm.js",
+      "require": "./index.js"
+    },
+    "./dist/mapbox-gl-compare.css": "./dist/mapbox-gl-compare.css"
   },
   "directories": {
     "example": "example"

@@ -7,7 +7,7 @@ export default {
     output: {
         file: 'dist/mapbox-gl-compare.js',
         format: 'umd',
-        name: 'MapboxCompare'
+        name: 'mapboxgl.Compare'
     },
     plugins: [
         resolve({ browser: true, preferBuiltins: false }),

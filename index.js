@@ -1,7 +1,15 @@
-'use strict';
+import syncMove from '@mapbox/mapbox-gl-sync-move';
 
-var syncMove = require('@mapbox/mapbox-gl-sync-move');
-var EventEmitter = require('events').EventEmitter;
+/**
+ * Minimal event emitter for internal use.
+ * Supports registering, removing, and firing named listeners.
+ */
+class EventEmitter {
+    constructor() { this._listeners = {}; }
+    on(type, fn) { (this._listeners[type] = this._listeners[type] || []).push(fn); return this; }
+    removeListener(type, fn) { this._listeners[type] = (this._listeners[type] || []).filter(l => l !== fn); return this; }
+    emit(type, data) { (this._listeners[type] || []).forEach(fn => fn(data)); }
+}
 
 /**
  * @param {Object} a The first Mapbox GL Map
@@ -218,8 +226,4 @@ Compare.prototype = {
   }
 };
 
-if (window.mapboxgl) {
-  mapboxgl.Compare = Compare;
-}
-
-module.exports = Compare;
+export default Compare;

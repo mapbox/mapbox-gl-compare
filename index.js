@@ -19,7 +19,8 @@ class EventEmitter {
  * @param {string} [options.orientation=vertical] The orientation of the compare slider. `vertical` creates a vertical slider bar to compare one map on the left (map A) with another map on the right (map B). `horizontal` creates a horizontal slider bar to compare on mop on the top (map A) and another map on the bottom (map B).
  * @param {boolean} [options.mousemove=false] If `true` the compare slider will move with the cursor, otherwise the slider will need to be dragged to move.
  * @example
- * var compare = new mapboxgl.Compare(beforeMap, afterMap, '#wrapper', {
+ * import Compare from 'mapbox-gl-compare';
+ * var compare = new Compare(beforeMap, afterMap, '#wrapper', {
  *   orientation: 'vertical',
  *   mousemove: true
  * });

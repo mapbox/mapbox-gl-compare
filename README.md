@@ -29,14 +29,6 @@ import Compare from 'mapbox-gl-compare';
 import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
 ```
 
-**ESM via CDN**
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mapbox-gl-compare@0.5.0/dist/mapbox-gl-compare.css">
-<script type="module">
-  import Compare from 'https://cdn.jsdelivr.net/npm/mapbox-gl-compare@0.5.0/dist/mapbox-gl-compare.esm.js';
-</script>
-```
 
 ### Usage
 
@@ -125,18 +117,17 @@ You'll need a [Mapbox access token](https://www.mapbox.com/help/create-api-acces
 
 ### Testing
 
-Tests require an MapboxAccessToken env variable to be set.
+Tests run in a real browser via Vitest and Playwright. Install the Playwright browser before running tests for the first time:
 
-    export MapboxAccessToken="YOUR ACCESS TOKEN"
+    npx playwright install chromium
 
-Lastly, run the test command from the console:
+A Mapbox access token is also required — see [Developing](#developing) for setup. Then run:
 
     npm test
 
 ### Deploying
 
 #### npm registry
-- `npm run build && npm run build:esm`
 - Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/main/package.json)
 - Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/CHANGELOG.md)
 - Commit and push

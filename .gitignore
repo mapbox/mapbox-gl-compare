@@ -3,3 +3,5 @@ example/style.css
 .idea/
 dist/
 memory/
+.env
+.vscode/

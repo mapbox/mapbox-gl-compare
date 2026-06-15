@@ -11,7 +11,11 @@
     },
     "./dist/mapbox-gl-compare.css": "./dist/mapbox-gl-compare.css"
   },
-  "files": ["dist", "index.js", "style.css"],
+  "files": [
+    "dist",
+    "index.js",
+    "style.css"
+  ],
   "directories": {
     "example": "example"
   },
@@ -19,7 +23,7 @@
     "start": "cp style.css example/style.css && budo example/index.js --serve example/bundle.js --dir example --live",
     "prepublishOnly": "npm run build",
     "build": "cp style.css dist/mapbox-gl-compare.css && rollup -c",
-    "test": "npm run lint && browserify -t envify test/index.js | smokestack -b firefox | tap-status",
+    "test": "vitest",
     "lint": "eslint --no-eslintrc -c .eslintrc index.js",
     "docs": "documentation build index.js --format=md > API.md"
   },
@@ -37,15 +41,16 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@vitest/browser": "^4.1.9",
+    "@vitest/browser-playwright": "^4.1.9",
     "budo": "^11.7.0",
     "documentation": "^14.0.0",
     "eslint": "^8.22.0",
     "mapbox-gl": "^2.10.0",
+    "playwright": "^1.61.0",
     "rollup": "^4.61.1",
-    "@rollup/plugin-terser": "^1.0.0",
-    "smokestack": "^3.6.0",
-    "tap-status": "^1.0.1",
-    "tape": "^5.6.0"
+    "vitest": "^4.1.9"
   },
   "dependencies": {
     "@mapbox/mapbox-gl-sync-move": "^0.3.1"

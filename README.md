@@ -37,12 +37,12 @@ import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
 ```js
 var before = new mapboxgl.Map({
   container: 'before',
-  style: 'mapbox://styles/mapbox/light-v9'
+  style: 'mapbox://styles/mapbox/light-v11'
 });
 
 var after = new mapboxgl.Map({
   container: 'after',
-  style: 'mapbox://styles/mapbox/dark-v9'
+  style: 'mapbox://styles/mapbox/dark-v11'
 });
 
 // A selector or reference to HTML element
@@ -63,12 +63,12 @@ import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
 
 const before = new mapboxgl.Map({
   container: 'before',
-  style: 'mapbox://styles/mapbox/light-v9'
+  style: 'mapbox://styles/mapbox/light-v11'
 });
 
 const after = new mapboxgl.Map({
   container: 'after',
-  style: 'mapbox://styles/mapbox/dark-v9'
+  style: 'mapbox://styles/mapbox/dark-v11'
 });
 
 // A selector or reference to HTML element
@@ -109,11 +109,13 @@ See [API.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/API.md) for c
 
 ### Developing
 
-    npm install & npm start & open http://localhost:9966
+Create a `.env` file at the repo root with your [Mapbox access token](https://www.mapbox.com/help/create-api-access-token/):
 
-You'll need a [Mapbox access token](https://www.mapbox.com/help/create-api-access-token/) stored in localstorage. Set it via
+    VITE_MAPBOX_ACCESS_TOKEN=your_token_here
 
-    localStorage.setItem('MapboxAccessToken', '<TOKEN HERE>');
+Then start the dev server:
+
+    npm start
 
 ### Testing
 
@@ -121,7 +123,7 @@ Tests run in a real browser via Vitest and Playwright. Install the Playwright br
 
     npx playwright install chromium
 
-A Mapbox access token is also required — see [Developing](#developing) for setup. Then run:
+A Mapbox access token is also required — see [Developing](#developing) for `.env` setup. Then run:
 
     npm test
 

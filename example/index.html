@@ -4,8 +4,6 @@
   <meta charset='utf-8' />
   <title></title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
   <link href='style.css' rel='stylesheet' />
   <style>
   body { margin:0; padding:0; overflow:hidden; }
@@ -17,7 +15,7 @@
                user-select: none;
   }
   .map {
-    position:absolute;
+    position:absolute !important;
     top:0;
     bottom:0;
     width:100%;
@@ -37,6 +35,6 @@
         <button id="close-button">X</button>
     </div>
   </div>
-  <script src='example/bundle.js'></script>
+  <script type="module" src="./index.js"></script>
 </body>
 </html>

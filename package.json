@@ -46,7 +46,7 @@
     "@vitest/browser-playwright": "^4.1.9",
     "documentation": "^14.0.0",
     "eslint": "^8.22.0",
-    "mapbox-gl": "^3.25.0",
+    "mapbox-gl": "^3.24.0",
     "playwright": "^1.61.0",
     "rollup": "^4.61.1",
     "vite": "^8.0.16",

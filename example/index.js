@@ -1,4 +1,4 @@
-import * as mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import Compare from '../index.js';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../style.css';

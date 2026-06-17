@@ -20,7 +20,7 @@ class EventEmitter {
  * @param {boolean} [options.mousemove=false] If `true` the compare slider will move with the cursor, otherwise the slider will need to be dragged to move.
  * @example
  * import Compare from 'mapbox-gl-compare';
- * var compare = new Compare(beforeMap, afterMap, '#wrapper', {
+ * const compare = new Compare(beforeMap, afterMap, '#wrapper', {
  *   orientation: 'vertical',
  *   mousemove: true
  * });

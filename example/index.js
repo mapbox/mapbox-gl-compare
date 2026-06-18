@@ -1,40 +1,43 @@
-'use strict';
-/* global mapboxgl */
+import mapboxgl from 'mapbox-gl';
+import Compare from '../index.js';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '../style.css';
 
-require('../');
-mapboxgl.accessToken = window.localStorage.getItem('MapboxAccessToken');
+const accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
-var before = new mapboxgl.Map({
+const before = new mapboxgl.Map({
+  accessToken,
   container: 'before',
-  style: 'mapbox://styles/mapbox/light-v8'
+  style: 'mapbox://styles/mapbox/light-v11'
 });
 
-var after = new mapboxgl.Map({
+const after = new mapboxgl.Map({
+  accessToken,
   container: 'after',
-  style: 'mapbox://styles/mapbox/dark-v8'
+  style: 'mapbox://styles/mapbox/dark-v11'
 });
 
 // Use either of these patterns to select a container for the compare widget
-var wrapperSelector = '#wrapper';
-var wrapperElement = document.body.querySelectorAll('#wrapper')[0];
+const wrapperSelector = '#wrapper';
+// const wrapperElement = document.body.querySelectorAll('#wrapper')[0];
 
 // available options
-var options = {
+const options = {
   mousemove: true,
   orientation: 'horizontal'
-}
+};
 
-window.compare = new mapboxgl.Compare(
+const compare = new Compare(
   before,
-  after, 
+  after,
   wrapperSelector
   // options
 );
 
-var closeButton = document.getElementById('close-button');
+const closeButton = document.getElementById('close-button');
 
-closeButton.addEventListener('click', function(e) {
+closeButton.addEventListener('click', function() {
   after.getContainer().style.display = 'none';
-  window.compare.remove();
+  compare.remove();
   after.remove();
 });

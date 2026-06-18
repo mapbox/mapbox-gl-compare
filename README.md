@@ -7,23 +7,74 @@ Swipe and sync between two maps
 
 Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/mapbox-gl-sync-move).
 
+### Installation
+
+**CDN**
+
+Include the script and stylesheet in your HTML. Compare is available globally as `mapboxgl.Compare`.
+
+```html
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.5.0/mapbox-gl-compare.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.5.0/mapbox-gl-compare.css">
+```
+
+**ESM via npm**
+
+```bash
+npm install mapbox-gl-compare
+```
+
+```js
+import Compare from 'mapbox-gl-compare';
+import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
+```
+
+
 ### Usage
+
+**CDN**
 
 ```js
 var before = new mapboxgl.Map({
-  container: 'before', // Container ID
-  style: 'mapbox://styles/mapbox/light-v9'
+  container: 'before',
+  style: 'mapbox://styles/mapbox/light-v11'
 });
 
 var after = new mapboxgl.Map({
-  container: 'after', // Container ID
-  style: 'mapbox://styles/mapbox/dark-v9'
+  container: 'after',
+  style: 'mapbox://styles/mapbox/dark-v11'
 });
 
 // A selector or reference to HTML element
 var container = '#comparison-container';
 
 new mapboxgl.Compare(before, after, container, {
+  mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
+  orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
+});
+```
+
+**ESM**
+
+```js
+import * as mapboxgl from 'mapbox-gl';
+import Compare from 'mapbox-gl-compare';
+import 'mapbox-gl-compare/dist/mapbox-gl-compare.css';
+
+const before = new mapboxgl.Map({
+  container: 'before',
+  style: 'mapbox://styles/mapbox/light-v11'
+});
+
+const after = new mapboxgl.Map({
+  container: 'after',
+  style: 'mapbox://styles/mapbox/dark-v11'
+});
+
+// A selector or reference to HTML element
+const container = '#comparison-container';
+
+new Compare(before, after, container, {
   mousemove: true, // Optional. Set to true to enable swiping during cursor movement.
   orientation: 'vertical' // Optional. Sets the orientation of swiper to horizontal or vertical, defaults to vertical
 });
@@ -58,26 +109,27 @@ See [API.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/API.md) for c
 
 ### Developing
 
-    npm install & npm start & open http://localhost:9966
+Create a `.env` file at the repo root with your [Mapbox access token](https://www.mapbox.com/help/create-api-access-token/):
 
-You'll need a [Mapbox access token](https://www.mapbox.com/help/create-api-access-token/) stored in localstorage. Set it via
+    VITE_MAPBOX_ACCESS_TOKEN=your_token_here
 
-    localStorage.setItem('MapboxAccessToken', '<TOKEN HERE>');
+Then start the dev server:
+
+    npm start
 
 ### Testing
 
-Tests require an MapboxAccessToken env variable to be set.
+Tests run in a real browser via Vitest and Playwright. Install the Playwright browser before running tests for the first time:
 
-    export MapboxAccessToken="YOUR ACCESS TOKEN"
+    npx playwright install chromium
 
-Lastly, run the test command from the console:
+A Mapbox access token is also required — see [Developing](#developing) for `.env` setup. Then run:
 
     npm test
 
 ### Deploying
 
 #### npm registry
-- `npm run build`
 - Update the version key in [package.json](https://github.com/mapbox/mapbox-gl-compare/blob/main/package.json)
 - Update [CHANGELOG.md](https://github.com/mapbox/mapbox-gl-compare/blob/main/CHANGELOG.md)
 - Commit and push

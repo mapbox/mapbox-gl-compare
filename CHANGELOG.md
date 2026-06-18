@@ -1,3 +1,9 @@
+v0.5.0
+---
+
+- Feature: Serve ESM as primary entrypoint, `import mapboxglCompare from 'mapbox-gl-compare'` and serve UMD bundle to full backwards compatibility.
+
+
 v0.4.2
 ---
 

@@ -1,7 +1,15 @@
-'use strict';
+import syncMove from '@mapbox/mapbox-gl-sync-move';
 
-var syncMove = require('@mapbox/mapbox-gl-sync-move');
-var EventEmitter = require('events').EventEmitter;
+/**
+ * Minimal event emitter for internal use.
+ * Supports registering, removing, and firing named listeners.
+ */
+class EventEmitter {
+    constructor() { this._listeners = {}; }
+    on(type, fn) { (this._listeners[type] = this._listeners[type] || []).push(fn); return this; }
+    removeListener(type, fn) { this._listeners[type] = (this._listeners[type] || []).filter(l => l !== fn); return this; }
+    emit(type, data) { (this._listeners[type] || []).forEach(fn => fn(data)); }
+}
 
 /**
  * @param {Object} a The first Mapbox GL Map
@@ -11,7 +19,8 @@ var EventEmitter = require('events').EventEmitter;
  * @param {string} [options.orientation=vertical] The orientation of the compare slider. `vertical` creates a vertical slider bar to compare one map on the left (map A) with another map on the right (map B). `horizontal` creates a horizontal slider bar to compare on mop on the top (map A) and another map on the bottom (map B).
  * @param {boolean} [options.mousemove=false] If `true` the compare slider will move with the cursor, otherwise the slider will need to be dragged to move.
  * @example
- * var compare = new mapboxgl.Compare(beforeMap, afterMap, '#wrapper', {
+ * import Compare from 'mapbox-gl-compare';
+ * const compare = new Compare(beforeMap, afterMap, '#wrapper', {
  *   orientation: 'vertical',
  *   mousemove: true
  * });
@@ -218,8 +227,4 @@ Compare.prototype = {
   }
 };
 
-if (window.mapboxgl) {
-  mapboxgl.Compare = Compare;
-} else if (typeof module !== 'undefined') {
-  module.exports = Compare;
-}
+export default Compare;

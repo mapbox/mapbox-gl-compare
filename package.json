@@ -1,15 +1,29 @@
 {
   "name": "mapbox-gl-compare",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Swipe and sync between two maps",
   "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./dist/mapbox-gl-compare.js"
+    },
+    "./dist/mapbox-gl-compare.css": "./dist/mapbox-gl-compare.css"
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "style.css"
+  ],
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "start": "cp style.css example/style.css && budo example/index.js --serve example/bundle.js --dir example --live",
-    "build": "cp style.css dist/mapbox-gl-compare.css && NODE_ENV=production && browserify index.js | uglifyjs -c -m > dist/mapbox-gl-compare.js",
-    "test": "npm run lint && browserify -t envify test/index.js | smokestack -b firefox | tap-status",
+    "start": "vite",
+    "prepublishOnly": "npm run build",
+    "build": "cp style.css dist/mapbox-gl-compare.css && rollup -c",
+    "test": "vitest",
     "lint": "eslint --no-eslintrc -c .eslintrc index.js",
     "docs": "documentation build index.js --format=md > API.md"
   },
@@ -25,16 +39,18 @@
   "author": "Mapbox",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^17.0.0",
-    "budo": "^11.7.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@vitest/browser": "^4.1.9",
+    "@vitest/browser-playwright": "^4.1.9",
     "documentation": "^14.0.0",
-    "envify": "^4.1.0",
     "eslint": "^8.22.0",
-    "mapbox-gl": "^2.10.0",
-    "smokestack": "^3.6.0",
-    "tap-status": "^1.0.1",
-    "tape": "^5.6.0",
-    "uglify-js": "^3.17.0"
+    "mapbox-gl": "^3.24.0",
+    "playwright": "^1.61.0",
+    "rollup": "^4.61.1",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.9"
   },
   "dependencies": {
     "@mapbox/mapbox-gl-sync-move": "^0.3.1"

@@ -1,3 +1,7 @@
 node_modules
 example/style.css
 .idea/
+dist/
+memory/
+.env
+.vscode/

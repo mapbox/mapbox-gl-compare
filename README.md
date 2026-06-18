@@ -11,7 +11,7 @@ Map movements are synced with [mapbox-gl-sync-move](https://github.com/mapbox/ma
 
 **CDN**
 
-Include the script and stylesheet in your HTML. `Compare` is attached to the `mapboxgl` global.
+Include the script and stylesheet in your HTML. Compare is available globally as `mapboxgl.Compare`.
 
 ```html
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.5.0/mapbox-gl-compare.js"></script>

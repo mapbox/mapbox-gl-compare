@@ -1,3 +1,8 @@
+v0.6.0
+---
+
+- Feature: Adds ESM bundle to `dist/` for consumption via CDN
+
 v0.5.0
 ---
 

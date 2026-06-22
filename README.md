@@ -140,4 +140,5 @@ A Mapbox access token is also required — see [Developing](#developing) for `.e
 
 ### mapbox cdn
 - `aws s3 cp --acl public-read ./dist/mapbox-gl-compare.js s3://mapbox-gl-js/plugins/mapbox-gl-compare/v$(node --print --eval "require('./package.json').version")/mapbox-gl-compare.js`
+- `aws s3 cp --acl public-read ./dist/mapbox-gl-compare.esm.js s3://mapbox-gl-js/plugins/mapbox-gl-compare/v$(node --print --eval "require('./package.json').version")/mapbox-gl-compare.esm.js`
 - `aws s3 cp --acl public-read ./dist/mapbox-gl-compare.css s3://mapbox-gl-js/plugins/mapbox-gl-compare/v$(node --print --eval "require('./package.json').version")/mapbox-gl-compare.css`
